@@ -4,14 +4,14 @@ namespace ChessBackend.Queries
 {
     public class UserData
     {
-        ChessBackendDbContext _context = new ChessBackendDbContext();
-
+     
         [UseProjection]
-        [HotChocolate.Types.UseFiltering]
-        [HotChocolate.Types.UseSorting]
-        public List<User> GetProducts()
+        [HotChocolate.Data.UseFiltering]
+        [HotChocolate.Data.UseSorting]
+        public  List<User> GetUsers([Service] ChessBackendDbContext context)
         {
-            return _context.Users.ToList();
+            return context.Users.ToList();
         }
+
     }
 }

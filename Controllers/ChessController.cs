@@ -1,18 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ChessBackend.Entities;
 
+
 namespace ChessBackend.Controllers
 {
     [ApiController]
-    public class ChessController : Controller
+    public class ChessController : ControllerBase
     {
 
-        ChessBackendDbContext _context = new ChessBackendDbContext();
+        private readonly ChessBackendDbContext _context;
+
+        public ChessController(ChessBackendDbContext context) { 
+            _context = context;
+        }
+
 
         [Route("GetUsers")]
         [HttpGet]
-        public List<User> GetProducts()
+        public List<User> GetUsers()
         {
+
             return _context.Users.ToList();
         }
     }

@@ -6,16 +6,16 @@ namespace ChessBackend
     public class ChessBackendDbContext : DbContext
     {
 
-        public ChessBackendDbContext()
-        {
 
+        public ChessBackendDbContext() { 
         }
-
         public ChessBackendDbContext(DbContextOptions<ChessBackendDbContext> options) : base (options)
         {
 
         }
 
-        public DbSet<User> Users => Set<User>();
+        public DbSet<User> Users { get; set; }
+
+    
     }
 }

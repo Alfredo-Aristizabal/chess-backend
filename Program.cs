@@ -1,8 +1,6 @@
 using ChessBackend;
 using ChessBackend.Queries;
-using HotChocolate.Execution.Processing;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 var builder = WebApplication.CreateBuilder(args);
 

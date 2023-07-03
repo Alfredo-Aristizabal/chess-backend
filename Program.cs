@@ -1,5 +1,5 @@
 using ChessBackend;
-using ChessBackend.Queries;
+using ChessBackend.GraphQL.Queries;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddGraphQLServer().AddQueryType<UserData>().AddProjections().AddFiltering().AddSorting();
+builder.Services.AddGraphQLServer().AddQueryType<UserData>().AddMutationType<Mutation>().AddProjections().AddFiltering().AddSorting();
 builder.Services.AddCors(o => o.AddPolicy("MyPolicy", b =>
 {
     b.WithOrigins("http://localhost:3000")

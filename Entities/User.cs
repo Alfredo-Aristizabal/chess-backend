@@ -20,9 +20,15 @@ namespace ChessBackend.Entities
             set { PasswordStored = Encrypt(value); } // Encripta el valor y lo guarda en PasswordStored }
         }
 
+
+        public void SetPassword(string password)
+        {
+            this.password = password;
+        }
         [Required]
         [MaxLength(100)]
         protected string PasswordStored { get; set; }
+
 
         // Método para encriptar el password usando Microsoft.AspNetCore.Identity
         private string Encrypt(string password)

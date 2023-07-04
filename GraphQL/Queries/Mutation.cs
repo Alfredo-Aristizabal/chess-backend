@@ -6,11 +6,20 @@ namespace ChessBackend.GraphQL.Queries
     {
         public async Task<User> AddUser([Service] ChessBackendDbContext context, string name, string password)
         {
-            var user = new User { name = name};
-            user.SetPassword(password);
-            context.Users.Add(user);
-            await context.SaveChangesAsync();
-            return user;
+            try
+            {
+                var user = new User { name = name };
+                user.SetPassword(password);
+                context.Users.Add(user);
+                await context.SaveChangesAsync();
+                return user;
+            }
+            catch (Exception ex)
+            {
+                // Muestra el mensaje de la excepción interna
+                Console.WriteLine(ex.InnerException.Message);
+                throw;
+            }
         }
 
         public async Task<User> UpdateUser([Service] ChessBackendDbContext context, int id, string name, string password)

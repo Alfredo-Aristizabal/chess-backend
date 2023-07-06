@@ -14,16 +14,36 @@ namespace ChessBackend.GraphQL.Queries
             return context.Users.ToList();
         }
 
-        public async Task<bool> VerifyPassword([Service] ChessBackendDbContext context, string name, string password)
+        public class VerifyPasswordResult
+        {
+            public bool UserFound { get; set; }
+            public bool PasswordCorrect { get; set; }
+        }
+
+        public async Task<VerifyPasswordResult> VerifyPassword([Service] ChessBackendDbContext context, string name, string password)
         {
             var user = await context.Users.FirstOrDefaultAsync(u => u.name == name);
             if (user == null)
             {
-                throw new Exception("User not found");
+                return new VerifyPasswordResult { UserFound = false, PasswordCorrect = false };
             }
 
-            return user.VerifyPassword(password);
+            return new VerifyPasswordResult { UserFound = true, PasswordCorrect = user.VerifyPassword(password) };
         }
 
+
+        public async Task<bool> VerifyUsernameExist([Service] ChessBackendDbContext context, string name)
+        {
+            var user = await context.Users.FirstOrDefaultAsync(u => u.name == name);
+            if (user == null)
+            {
+
+                return false;
+            }
+            else {
+                return true;
+            }
+
+        }
     }
 }
